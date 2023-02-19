@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SimpleDice</string>
+    <string name="delete_switch">DeleteSwitch</string>
+    <string name="roll_dice">Roll Dice</string>
+    <string name="add_dice">Add Dice</string>
+    <string name="n_a">N/A</string>
 </resources>
