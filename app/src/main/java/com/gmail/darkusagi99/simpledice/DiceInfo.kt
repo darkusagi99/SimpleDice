@@ -16,18 +16,21 @@ object DiceInfo {
      */
     val ITEM_MAP: MutableMap<Int, DiceItem> = HashMap()
 
+    private var NEXT_ID : Int = 0
+
     fun addDice(item: DiceItem) {
         ITEMS.add(item)
         ITEM_MAP[item.id] = item
     }
 
     fun deleteDice(item: DiceItem) {
-        ITEMS.add(item)
+        ITEMS.remove(item)
         ITEM_MAP[item.id] = item
     }
 
-    fun createNewDice(id: Int): DiceItem {
-        return DiceItem(id, 1, 7, 0, 0)
+    fun createNewDice(): DiceItem {
+        NEXT_ID++
+        return DiceItem(NEXT_ID, 1, 7, 0, 0)
     }
 
     private fun rollDice(id : Int) {
@@ -43,5 +46,10 @@ object DiceInfo {
      */
     data class DiceItem(val id: Int, var min: Int, var max: Int, var lastRoll: Int, var shape: Int) {
         override fun toString(): String = "Id : $id - last roll : $lastRoll"
+    }
+
+    data class DiceConfigEntry(val id: Int, val name : String, val min : Int, val max : Int, var shape : Int) {
+
+        override fun toString(): String = "Id : $id - type : $name"
     }
 }

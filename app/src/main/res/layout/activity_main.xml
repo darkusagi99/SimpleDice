@@ -8,8 +8,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/DiceRw"
+        android:name="com.gmail.darkusagi99.simpledice.ItemListFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        app:layoutManager="LinearLayoutManager"
+        tools:listitem="@layout/dice_entry" >
 
     </androidx.recyclerview.widget.RecyclerView>
 
