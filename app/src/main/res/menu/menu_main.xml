@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/app_delete_switch"
-        android:title="@string/delete_switch"
+        android:id="@+id/app_setting_switch"
+        android:title="@string/setting_switch"
         app:actionLayout="@layout/switch_item"
         app:showAsAction="always" />
 </menu>
