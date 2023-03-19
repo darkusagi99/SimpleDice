@@ -9,12 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Switch
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
+
 class MainActivity : AppCompatActivity() {
+
+    var settingDiceMode = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Initialisation de la vue
@@ -50,6 +55,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+
+        val sw = menu!!.findItem(R.id.app_setting_switch).actionView!!
+            .findViewById(R.id.settingSwitch) as Switch
+
+        sw.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                settingDiceMode = 1
+            } else {
+                settingDiceMode = 0
+            }
+        }
 
         return super.onCreateOptionsMenu(menu)
     }
