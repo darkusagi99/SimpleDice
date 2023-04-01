@@ -86,7 +86,16 @@ class MainActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = values[position]
+
+            // Show dice value
             holder.diceButton.text = item.lastRoll.toString()
+
+            // Add roll action on button
+            holder.diceButton.setOnClickListener{
+                DiceInfo.rollDice(position)
+                this.notifyItemChanged(position)
+
+            }
 
             with(holder.itemView) {
                 tag = item

@@ -21,6 +21,7 @@ object DiceInfo {
     fun addDice(item: DiceItem) {
         ITEMS.add(item)
         ITEM_MAP[item.id] = item
+        NEXT_ID++
     }
 
     fun deleteDice(item: DiceItem) {
@@ -29,11 +30,10 @@ object DiceInfo {
     }
 
     fun createNewDice(): DiceItem {
-        NEXT_ID++
         return DiceItem(NEXT_ID, 1, 7, 0, 0)
     }
 
-    private fun rollDice(id : Int) {
+    fun rollDice(id : Int) {
         // Get dice to roll
         val currentDice = ITEM_MAP[id]
         // Roll the dice between min and max (1 to 6 if not defined)
