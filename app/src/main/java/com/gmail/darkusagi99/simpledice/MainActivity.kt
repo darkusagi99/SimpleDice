@@ -42,10 +42,11 @@ class MainActivity : AppCompatActivity() {
                         DialogInterface.BUTTON_POSITIVE -> {
                             Toast.makeText(this, "Création - " + taskEditText.text.toString(), Toast.LENGTH_SHORT).show()
                             val maxDiceValue = taskEditText.text.toString().toIntOrNull() ?: 6
-                            DiceInfo.addDice(DiceInfo.createNewDice(maxDiceValue))
+                            val newDicePosition = DiceInfo.addDice(DiceInfo.createNewDice(maxDiceValue))
 
-                            // TODO - Find adapter and notify idem added
-
+                            // Find adapter and notify idem added
+                            val recyclerView : RecyclerView = findViewById(R.id.DiceRw)
+                            recyclerView.adapter?.notifyItemInserted(newDicePosition)
                         }
                     }
                 }
@@ -58,12 +59,11 @@ class MainActivity : AppCompatActivity() {
                     .setPositiveButton("OK", dialogClickListener).show()
             } else {
                 // Normal mode -> Roll all dices
-                // TODO - Add code for rolling all dices
-                val ab: AlertDialog.Builder = AlertDialog.Builder(view.context)
-                ab.setMessage("Roll all dices")
-                    .setView(taskEditText)
-                    .setPositiveButton("OK", dialogClickListener).show()
+                DiceInfo.rollAllDices()
 
+                // Find adapter and notify list refresh
+                val recyclerView : RecyclerView = findViewById(R.id.DiceRw)
+                recyclerView.adapter?.notifyItemRangeChanged(0, DiceInfo.ITEMS.size)
             }
         }
 
