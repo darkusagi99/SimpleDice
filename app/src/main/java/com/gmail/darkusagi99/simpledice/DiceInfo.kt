@@ -18,10 +18,11 @@ object DiceInfo {
 
     private var NEXT_ID : Int = 0
 
-    fun addDice(item: DiceItem) {
+    fun addDice(item: DiceItem): Int {
         ITEMS.add(item)
         ITEM_MAP[item.id] = item
         NEXT_ID++
+        return item.id
     }
 
     fun deleteDice(item: DiceItem) {
@@ -29,8 +30,8 @@ object DiceInfo {
         ITEM_MAP[item.id] = item
     }
 
-    fun createNewDice(): DiceItem {
-        return DiceItem(NEXT_ID, 1, 7, 0, 0)
+    fun createNewDice(maxValue : Int): DiceItem {
+        return DiceItem(NEXT_ID, 1, maxValue + 1, 0, 0)
     }
 
     fun rollDice(id : Int) {
@@ -39,6 +40,12 @@ object DiceInfo {
         // Roll the dice between min and max (1 to 6 if not defined)
         val currentRoll = Random.nextInt(currentDice?.min ?:1, currentDice?.max ?:7)
         currentDice?.lastRoll = currentRoll
+    }
+
+    fun rollAllDices() {
+        for(currentDice in ITEMS) {
+            rollDice(currentDice.id)
+        }
     }
 
     /**

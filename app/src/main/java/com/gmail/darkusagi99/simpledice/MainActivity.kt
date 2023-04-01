@@ -25,8 +25,11 @@ class MainActivity : AppCompatActivity() {
         // Initialisation de la vue
         setContentView(R.layout.activity_main)
 
-        DiceInfo.addDice(DiceInfo.createNewDice())
-        DiceInfo.addDice(DiceInfo.createNewDice())
+        DiceInfo.addDice(DiceInfo.createNewDice(6))
+        DiceInfo.addDice(DiceInfo.createNewDice(6))
+
+        // Initialisation de la recylerView
+        setupRecyclerView(findViewById(R.id.DiceRw))
 
         // Mise en place des boutons
         findViewById<FloatingActionButton>(R.id.addActionButton).setOnClickListener { view ->
@@ -38,18 +41,32 @@ class MainActivity : AppCompatActivity() {
                     when (which) {
                         DialogInterface.BUTTON_POSITIVE -> {
                             Toast.makeText(this, "Création - " + taskEditText.text.toString(), Toast.LENGTH_SHORT).show()
-                            DiceInfo.addDice(DiceInfo.createNewDice())
+                            val maxDiceValue = taskEditText.text.toString().toIntOrNull() ?: 6
+                            DiceInfo.addDice(DiceInfo.createNewDice(maxDiceValue))
+
+                            // TODO - Find adapter and notify idem added
+
                         }
                     }
                 }
-            val ab: AlertDialog.Builder = AlertDialog.Builder(view.context)
-            ab.setMessage("Ajouter dé ?")
-                .setView(taskEditText)
-                .setPositiveButton("OK", dialogClickListener).show()
+
+            if (settingDiceMode == 1) {
+                // Config mode -> Add button
+                val ab: AlertDialog.Builder = AlertDialog.Builder(view.context)
+                ab.setMessage("Ajouter dé ?")
+                    .setView(taskEditText)
+                    .setPositiveButton("OK", dialogClickListener).show()
+            } else {
+                // Normal mode -> Roll all dices
+                // TODO - Add code for rolling all dices
+                val ab: AlertDialog.Builder = AlertDialog.Builder(view.context)
+                ab.setMessage("Roll all dices")
+                    .setView(taskEditText)
+                    .setPositiveButton("OK", dialogClickListener).show()
+
+            }
         }
 
-        // Initialisation de la recylerView
-        setupRecyclerView(findViewById(R.id.DiceRw))
 
     }
 
