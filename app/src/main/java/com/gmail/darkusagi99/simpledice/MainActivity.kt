@@ -14,6 +14,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.NonDisposableHandle.parent
+import kotlin.coroutines.coroutineContext
 
 
 class MainActivity : AppCompatActivity() {
@@ -80,6 +82,9 @@ class MainActivity : AppCompatActivity() {
             } else {
                 DiceInfo.SETTING_MODE = 0
             }
+
+            val recyclerView : RecyclerView = findViewById(R.id.DiceRw)
+            recyclerView.adapter?.notifyItemRangeChanged(0, DiceInfo.ITEMS.size)
         }
 
         return super.onCreateOptionsMenu(menu)
@@ -103,7 +108,18 @@ class MainActivity : AppCompatActivity() {
             val item = values[position]
 
             // Show dice value
-            holder.diceButton.text = item.lastRoll.toString()
+            if (DiceInfo.SETTING_MODE == 0) {
+                // If setting mode - Show dice value
+                holder.diceButton.text = item.lastRoll.toString()
+                holder.diceButton.setBackgroundResource(R.drawable.ic_launcher_background)
+                //holder.diceButton.setBackgroundColor(
+                //        R.color.red)
+            } else {
+                // If edit mode - show delete icon
+                holder.diceButton.text = ""
+                holder.diceButton.setBackgroundResource(R.drawable.ic_action_delete)
+                //holder.diceButton.setBackgroundColor(getResources().getColor(R.color.red))
+            }
 
             // Add roll action on button
             holder.diceButton.setOnClickListener{
