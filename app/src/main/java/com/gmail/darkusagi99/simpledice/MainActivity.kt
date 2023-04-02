@@ -1,6 +1,7 @@
 package com.gmail.darkusagi99.simpledice
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,10 +13,9 @@ import android.widget.EditText
 import android.widget.Switch
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.NonDisposableHandle.parent
-import kotlin.coroutines.coroutineContext
 
 
 class MainActivity : AppCompatActivity() {
@@ -77,13 +77,16 @@ class MainActivity : AppCompatActivity() {
             .findViewById(R.id.settingSwitch) as Switch
 
         sw.setOnCheckedChangeListener { _, isChecked ->
+
+
+            val recyclerView : RecyclerView = findViewById(R.id.DiceRw)
+
             if (isChecked) {
                 DiceInfo.SETTING_MODE = 1
             } else {
                 DiceInfo.SETTING_MODE = 0
             }
 
-            val recyclerView : RecyclerView = findViewById(R.id.DiceRw)
             recyclerView.adapter?.notifyItemRangeChanged(0, DiceInfo.ITEMS.size)
         }
 
@@ -97,6 +100,12 @@ class MainActivity : AppCompatActivity() {
     class SimpleItemRecyclerViewAdapter(private val values: List<DiceInfo.DiceItem>) :
         RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
+        lateinit var context : Context
+
+        override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+            super.onAttachedToRecyclerView(recyclerView)
+            context = recyclerView.context
+        }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context)
@@ -112,13 +121,12 @@ class MainActivity : AppCompatActivity() {
                 // If setting mode - Show dice value
                 holder.diceButton.text = item.lastRoll.toString()
                 holder.diceButton.setBackgroundResource(R.drawable.ic_launcher_background)
-                //holder.diceButton.setBackgroundColor(
-                //        R.color.red)
+                holder.diceButton.backgroundTintList = ContextCompat.getColorStateList(context, R.color.purple_500)
             } else {
                 // If edit mode - show delete icon
                 holder.diceButton.text = ""
                 holder.diceButton.setBackgroundResource(R.drawable.ic_action_delete)
-                //holder.diceButton.setBackgroundColor(getResources().getColor(R.color.red))
+                holder.diceButton.backgroundTintList = ContextCompat.getColorStateList(context, R.color.red)
             }
 
             // Add roll action on button
