@@ -18,8 +18,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
-    var settingDiceMode = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Initialisation de la vue
@@ -51,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-            if (settingDiceMode == 1) {
+            if (DiceInfo.SETTING_MODE == 1) {
                 // Config mode -> Add button
                 val ab: AlertDialog.Builder = AlertDialog.Builder(view.context)
                 ab.setMessage("Ajouter dé ?")
@@ -78,9 +76,9 @@ class MainActivity : AppCompatActivity() {
 
         sw.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                settingDiceMode = 1
+                DiceInfo.SETTING_MODE = 1
             } else {
-                settingDiceMode = 0
+                DiceInfo.SETTING_MODE = 0
             }
         }
 
@@ -109,8 +107,13 @@ class MainActivity : AppCompatActivity() {
 
             // Add roll action on button
             holder.diceButton.setOnClickListener{
-                DiceInfo.rollDice(position)
-                this.notifyItemChanged(position)
+                if (DiceInfo.SETTING_MODE == 0) {
+                    DiceInfo.rollDice(position)
+                    this.notifyItemChanged(position)
+                } else {
+                    DiceInfo.deleteDice(item)
+                    this.notifyItemRemoved(position)
+                }
 
             }
 
@@ -125,4 +128,5 @@ class MainActivity : AppCompatActivity() {
             val diceButton: Button = view.findViewById(R.id.diceDisplay)
         }
     }
+
 }
