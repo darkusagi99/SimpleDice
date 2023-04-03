@@ -17,11 +17,11 @@ object DiceInfo {
     /**
      * List of number of face by shapes
      * */
-    var TRIANGLE_LIST : List<Int> =  listOf(4, 8, 20, 23, 60)
-    var PENTAGON_LIST : List<Int> =  listOf(10, 17, 19, 22, 26, 28)
-    var DIAMOND_LIST : List<Int> =  listOf(5, 12, 24, 27, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59)
-    var KITE_LIST : List<Int> =  listOf(7, 25, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47)
-    var HEXAGON_LIST : List<Int> =  listOf(13, 14, 15)
+    private var TRIANGLE_LIST : List<Int> =  listOf(4, 8, 20, 23, 60)
+    private var PENTAGON_LIST : List<Int> =  listOf(10, 17, 19, 22, 26, 28)
+    private var DIAMOND_LIST : List<Int> =  listOf(5, 12, 24, 27, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59)
+    private var KITE_LIST : List<Int> =  listOf(7, 25, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47)
+    private var HEXAGON_LIST : List<Int> =  listOf(13, 14, 15)
 
     fun addDice(item: DiceItem): Int {
         ITEMS.add(item)

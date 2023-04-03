@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
     class SimpleItemRecyclerViewAdapter(private val values: List<DiceInfo.DiceItem>) :
         RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
-        lateinit var context : Context
+        private lateinit var context : Context
 
         override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
             super.onAttachedToRecyclerView(recyclerView)
