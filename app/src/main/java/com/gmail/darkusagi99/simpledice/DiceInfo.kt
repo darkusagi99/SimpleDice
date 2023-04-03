@@ -45,16 +45,16 @@ object DiceInfo {
             (TRIANGLE_LIST.contains(maxValue)) -> vShape = R.drawable.ic_dice_triangle
 
             // 10, 17, 19, 22, 26, 28 -> Pentagone
-            (PENTAGON_LIST.contains(maxValue)) -> vShape = R.drawable.ic_dice_triangle
+            (PENTAGON_LIST.contains(maxValue)) -> vShape = R.drawable.ic_dice_pentagon
 
             // 5, 12, 24, 27 48 à 60 -> Diamant
-            (DIAMOND_LIST.contains(maxValue)) -> vShape = R.drawable.ic_dice_triangle
+            (DIAMOND_LIST.contains(maxValue)) -> vShape = R.drawable.ic_dice_diamond
 
             // 7, 25, 30 à 47 -> Losange
-            (KITE_LIST.contains(maxValue)) -> vShape = R.drawable.ic_dice_triangle
+            (KITE_LIST.contains(maxValue)) -> vShape = R.drawable.ic_dice_kite
 
             // 13, 14, 15 -> Hexagone
-            (HEXAGON_LIST.contains(maxValue)) -> vShape = R.drawable.ic_dice_triangle
+            (HEXAGON_LIST.contains(maxValue)) -> vShape = R.drawable.ic_dice_hexagon
 
             // Nbe faces > 60 -> Cercle
             (maxValue > 60) -> vShape = R.drawable.ic_dice_circle
