@@ -9,7 +9,7 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
+import android.widget.NumberPicker
 import android.widget.Switch
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -34,14 +34,19 @@ class MainActivity : AppCompatActivity() {
         // Mise en place des boutons
         findViewById<FloatingActionButton>(R.id.addActionButton).setOnClickListener { view ->
 
-            val taskEditText =  EditText(view.context)
+            val numberPicker = NumberPicker(view.context)
+            // Choix des dés entre 2 et 1000 - Défaut 6
+            numberPicker.minValue = 2
+            numberPicker.maxValue = 1000
+            numberPicker.value = 6
+
             //val diceEditSlider = (View.context)
             val dialogClickListener =
                 DialogInterface.OnClickListener { _, which ->
                     when (which) {
                         DialogInterface.BUTTON_POSITIVE -> {
-                            Toast.makeText(this, "Création - " + taskEditText.text.toString(), Toast.LENGTH_SHORT).show()
-                            val maxDiceValue = taskEditText.text.toString().toIntOrNull() ?: 6
+                            Toast.makeText(this, "Création dé " + numberPicker.value.toString() + " faces", Toast.LENGTH_SHORT).show()
+                            val maxDiceValue = numberPicker.value
                             val newDicePosition = DiceInfo.addDice(DiceInfo.createNewDice(maxDiceValue))
 
                             // Find adapter and notify idem added
@@ -54,8 +59,8 @@ class MainActivity : AppCompatActivity() {
             if (DiceInfo.SETTING_MODE == 1) {
                 // Config mode -> Add button
                 val ab: AlertDialog.Builder = AlertDialog.Builder(view.context)
-                ab.setMessage("Ajouter dé ?")
-                    .setView(taskEditText)
+                ab.setMessage("Ajouter dé ? - Choisir le nombre de faces")
+                    .setView(numberPicker)
                     .setPositiveButton("OK", dialogClickListener).show()
             } else {
                 // Normal mode -> Roll all dices
