@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity() {
             if (DiceInfo.SETTING_MODE == 0) {
                 // If setting mode - Show dice value
                 holder.diceButton.text = item.lastRoll.toString()
-                holder.diceButton.setBackgroundResource(R.drawable.ic_dice_square)
+                holder.diceButton.setBackgroundResource(item.shape)
                 holder.diceButton.backgroundTintList = ContextCompat.getColorStateList(context, R.color.purple_500)
             } else {
                 // If edit mode - show delete icon
